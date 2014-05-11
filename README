@@ -1,4 +1,4 @@
-Device tree for building CyanogenMod 11 fothe Samsung Galaxy Player 3.6
+Device tree for building CyanogenMod 11 for the Samsung Galaxy Player 3.6
 
 This is using the stock Samsung-OMAP3 Linux-Android kern 2.6.35.7.
 The kernel "kernel-rebased" isn't booting yet, it has different GPU drivers.
