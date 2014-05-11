@@ -1,0 +1,21 @@
+#
+# system.prop for Samsung YP-GS1
+#
+
+rild.libpath=/system/lib/libsec-ril-apalone.so
+rild.libargs=-d /dev/ttyS0
+ro.sf.lcd_density=160
+
+# CWM key repeat
+ro.cwm.enable_key_repeat=true
+ro.cwm.repeatable_keys=115,114,158
+
+# Disable zram
+ro.zram.default=0
+
+# Low-RAM
+ro.config.low_ram=true
+
+# OMAP stuff
+
+com.ti.omap_enhancement=true
