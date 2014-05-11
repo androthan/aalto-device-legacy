@@ -1,0 +1,8 @@
+#
+# Board properties for Samsung YP-GS1 with FloydOS
+#
+
+rild.libpath=/system/lib/libsec-ril-apalone.so
+rild.libargs=-d /dev/ttyS0
+ro.sf.lcd_density=160
+

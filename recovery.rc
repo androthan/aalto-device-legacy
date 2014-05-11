@@ -1,0 +1,84 @@
+# Recovery boot script (recovery.rc) for Samsung Galaxy Player 3.6 running FloydOS
+# Jonathan Grundmann, androthan<at>gmail.com, 2014
+# Script gets executed by init.
+
+on early-init
+    start ueventd
+
+on init
+    export PATH /sbin:/system/sbin:/system/bin:/system/xbin:/
+    export LD_LIBRARY_PATH /system/lib
+    export ANDROID_ROOT /system
+    export ANDROID_DATA /data
+    export INTERNAL_STORAGE /sdcard
+
+    symlink /system/etc /etc
+
+    mkdir /sdcard
+    mkdir /emmc
+    mkdir /preload
+    mkdir /system
+    mkdir /data
+    mkdir /cache
+    mkdir /efs
+    mkdir /tmp
+    mkdir /dbdata
+
+    mkdir /mnt 0775 root root
+
+    #mount /tmp /tmp tmpfs   
+
+on early-fs
+    insmod /lib/modules/j4fs.ko
+    mkdir /mnt/.lfs 0755 root root
+    mount j4fs /dev/block/mmcblk0p4 /mnt/.lfs       
+    insmod /lib/modules/param.ko    
+
+    chown root root /sbin/fat.format
+    chmod 750 /sbin/fat.format
+
+# change permission on recovery
+    chown root root /sbin/recovery
+    chmod 0770 /sbin/recovery        
+
+on fs
+    mount tmpfs tmpfs /tmp
+    chown radio system /efs
+    chmod 0771 /efs
+    mount ext4 /dev/block/mmcblk0p1 /efs nosuid nodev noatime wait
+
+# set properties for script-asserts
+   setprop ro.product.device YP-GS1
+   setprop ro.build.product YP-GS1
+   setprop ro.product.board YP-GS1
+
+on post-fs
+#    mount rootfs rootfs / ro remount
+
+    write /proc/sys/kernel/panic_on_oops 1
+    write /proc/sys/kernel/hung_task_timeout_secs 0
+    write /proc/cpu/alignment 4
+    write /proc/sys/kernel/sched_latency_ns 10000000
+    write /proc/sys/kernel/sched_wakeup_granularity_ns 2000000
+    write /proc/sys/kernel/sched_compat_yield 1
+    write /proc/sys/kernel/sched_child_runs_first 0
+	
+on boot
+
+    ifup lo
+    hostname localhost
+    domainname localdomain
+
+    class_start default
+
+### Start services
+service ueventd /sbin/ueventd
+    critical
+
+service console /sbin/sh
+    console
+
+service recovery /sbin/recovery
+
+service adbd /sbin/adbd recovery
+
