@@ -149,6 +149,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
 	device/samsung/aalto/libaudio/audio_policy.conf:system/etc/audio_policy.conf
 
+# HWComposer
+PRODUCT_PACKAGES += hwcomposer.default
+
 # SGX config file
 PRODUCT_COPY_FILES += \
 	device/samsung/aalto/etc/powervr.ini:system/etc/powervr.ini
