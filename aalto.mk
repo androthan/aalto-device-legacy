@@ -150,7 +150,8 @@ PRODUCT_COPY_FILES += \
 	device/samsung/aalto/libaudio/audio_policy.conf:system/etc/audio_policy.conf
 
 # HWComposer
-PRODUCT_PACKAGES += hwcomposer.default
+#PRODUCT_PACKAGES += hwcomposer.omap3
+
 
 # SGX config file
 PRODUCT_COPY_FILES += \
@@ -199,7 +200,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
        ro.telephony.ril.v3=icccardstatus,datacall,signalstrength,facilitylock \
        ro.telephony.call_ring.multiple=false \
        ro.telephony.call_ring.delay=2000 \
-       mobiledata.interfaces=pdp0,eth0,gprs,ppp0
+       mobiledata.interfaces=pdp0,eth0,gprs,ppp0 \
+#       debug.sf.hw=0
 
 
 # Set default USB interface
