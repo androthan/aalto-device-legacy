@@ -22,6 +22,7 @@ PRODUCT_COPY_FILES := \
 # CM init files
 PRODUCT_COPY_FILES += \
 	device/samsung/aalto/init.aalto.rc:root/init.aalto.rc \
+	device/samsung/aalto/default.prop:root/default.prop \
 	device/samsung/aalto/init.aalto.usb.rc:root/init.aalto.usb.rc \
 	device/samsung/aalto/fstab.aalto:root/fstab.aalto \
 	device/samsung/aalto/lpm.rc:root/lpm.rc \
