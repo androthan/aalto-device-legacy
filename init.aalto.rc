@@ -27,8 +27,11 @@ on fs
     mkdir /radio 0775 radio radio
     mkdir /efs 0775 radio radio
    
-
-    mount ext4 /dev/block/mmcblk0p8 /system
+# Mount everything
+    mount ext4 /dev/block/mmcblk0p1 /efs wait
+    mount ext4 /dev/block/mmcblk0p7 /cache wait
+    mount ext4 /dev/block/mmcblk0p8 /system wait
+    mount ext4 /dev/block/mmcblk0p9 /data wait
 
     mount_all fstab.aalto
 
