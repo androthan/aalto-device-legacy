@@ -12,6 +12,7 @@ on init
 
     mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
     mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+    mkdir /storage 0775 system system
     mkdir /storage/sdcard0 0700 system system
     mkdir /storage/sdcard1 0700 system system
     symlink /storage/sdcard0 /sdcard
@@ -57,6 +58,9 @@ on post-fs-data
 # permission for battery
     chown radio system /sys/class/power_supply/battery/batt_fuelgauge_reset
     chmod 0664 /sys/class/power_supply/battery/batt_fuelgauge_reset
+
+# ISP Resizer DSSCOMP
+    chmod 0777 /sys/devices/platform/dsscomp/isprsz/enable
 
 # change permission of ftm_sleep
     chown system system /sys/power/ftm_sleep
@@ -183,9 +187,6 @@ on post-fs-data
 
     # change permissions for lcd_power
     chown radio system /sys/class/backlight/omap_bl/device/lcd_power
-
-# Permissions for battery-monitor work delay
-#    chown system system /sys/devices/platform/secBattMonitor/power_supply/battery/work_delay
 
 # geomagnetic
     chown system input /sys/class/input/input4/enable
