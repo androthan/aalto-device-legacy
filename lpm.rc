@@ -33,7 +33,7 @@ loglevel 3
 on fs
 
 # We chown/chmod /data again so because mount is run as root + defaults 
-    mount ext4 /dev/block/mmcblk0p3 /data nosuid nodev noatime
+    mount ext4 /dev/block/mmcblk0p3 /data nosuid nodev noatime wait
 
 on post-fs
     # once everything is setup, no need to modify /
