@@ -41,9 +41,7 @@ RAMDISK_OFFSET := 0x82800000
 
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/aalto/mkbootimg.mk
 
-# Inline kernel building config
-# TARGET_KERNEL_CONFIG := aalto_defconfig
-# TARGET_KERNEL_SOURCE := kernel/samsung/aalto
+# Prebuilt kernel (2.6.35.7)
 TARGET_PREBUILT_KERNEL := device/samsung/aalto/kernel
 
 # recovery
