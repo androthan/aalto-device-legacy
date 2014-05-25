@@ -133,7 +133,9 @@ PRODUCT_PACKAGES := \
     bdaddr_read \
     bootmenu_busybox \
     SamsungServiceMode \
-    DeviceParts
+    playlpm \
+    lpmkey \
+    charging_mode \
 
 #Filesystem binaries
 PRODUCT_PACKAGES += \
