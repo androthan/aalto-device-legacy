@@ -49,7 +49,6 @@ TARGET_PREBUILT_KERNEL := device/samsung/aalto/kernel
 
 # recovery
 BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
 # BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/aalto/recovery/recovery_keys.c
 # BOARD_USES_BML_OVER_MTD := true
 TARGET_RECOVERY_FSTAB := device/samsung/aalto/fstab.aalto
