@@ -28,15 +28,21 @@ on fs
     mkdir /efs 0775 radio radio
    
 # Mount everything
-    mount ext4 /dev/block/mmcblk0p1 /efs wait
-    mount ext4 /dev/block/mmcblk0p7 /cache wait
-    mount ext4 /dev/block/mmcblk0p8 /system wait
-    mount ext4 /dev/block/mmcblk0p9 /data wait
+    mount ext4 /dev/block/mmcblk0p1 /efs
+    mount ext4 /dev/block/mmcblk0p7 /cache
+    mount ext4 /dev/block/mmcblk0p8 /system
+    mount ext4 /dev/block/mmcblk0p9 /data
 
     mount_all fstab.aalto
 
     # download cache
     mkdir /data/download 0770 system cache
+
+    # Kernel modules
+    insmod /system/lib/modules/vibetonz.ko
+    insmod /system/lib/modules/gps.ko
+    insmod /system/lib/modules/Si4709_driver.ko
+    insmod /system/lib/modules/btwilink.ko
 
     # set permissions for files in /efs
     chown radio radio /efs
