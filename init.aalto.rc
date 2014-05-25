@@ -26,6 +26,8 @@ on init
 on fs
     mkdir /radio 0775 radio radio
     mkdir /efs 0775 radio radio
+   
+
     mount ext4 /dev/block/mmcblk0p8 /system
 
     mount_all fstab.aalto
@@ -103,6 +105,9 @@ on post-fs-data
 
 #Permission for Vibration Intensity Setting
     chown system system /sys/vibetonz/pwmvalue_intensity
+
+# DSSComposer permissions
+    chmod 0777 /dev/dsscomp
 
 # change permissions for overlay managers and display devices
     chmod 0777 /sys/devices/platform/omapdss/manager0/name
