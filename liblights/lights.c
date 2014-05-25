@@ -129,6 +129,21 @@ set_light_battery(struct light_device_t* dev,
 {
     return 0;
 }
+set_light_buttons(struct light_device_t* dev,
+        struct light_state_t const* state)
+{
+    int brightness = rgb_to_brightness(state);
+    int err;
+
+
+   pthread_mutex_lock(&g_lock);
+    ALOGD("set_light_buttons: %d\n", brightness > 0 ? LEDS_LIGHT_ON : LEDS_LIGHT_OFF);
+    err = write_int(BUTTON_FILE, brightness > 0 ? LEDS_LIGHT_ON : LEDS_LIGHT_OFF);
+    pthread_mutex_unlock(&g_lock);
+
+    return err;
+}
+
 
 static int
 set_light_notification(struct light_device_t* dev,
