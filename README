@@ -1,7 +1,54 @@
 Device tree for building CyanogenMod 11 for the Samsung Galaxy Player 3.6
 
-This is using the stock Samsung-OMAP3 Linux-Android kern 2.6.35.7.
-The kernel "kernel-rebased" isn't booting yet, it has different GPU drivers.
-KitKat isn't booting yet on this device.
+This is a short guide for compiling CM11 (Android 4.4.x) for the YP-GS1 on your computer.
+This is using an enhanced, upfixed and optimized Stock kernel (Samsung-OMAP3 Android-Linux 2.6.35.7).
+Please don't forget to commit ALL changes you did!
+If you get errors while compiling: Search on Google -> Ask at XDA
+I suggest to sync all repositories ("repo sync") at least 2 times in a week, to keep everything updated.
+This guide requires that a full CyanogenMod 11 build environment is setten up on your PC.
+[To setup a build environment:
+ 1. Follow all steps for Linux: http://source.android.com/source/initializing.html
+ 2. Then follow these steps: http://www.zimbio.com/Linux/articles/ugafotvIwWk/How+build+CyanogenMod+source (Step 1-5)]
 
-Please commit the changes you made!
+Build CM11 for the Samsung GP 3.6
+
+1. Add the following lines to <source_path>/.repo/manifest.xml
+  <project name="androthan/android_device_samsung_aalto" path="device/samsung/aalto" remote="github" revision="cm-11.0" />
+  <project name="androthan/android_vendor_samsung_aalto" path="vendor/samsung/aalto" remote="github" revision="cm-11.0" />
+
+2. Open terminal
+  - cd <source_path>
+  - repo sync
+
+(3. If you want to use your own-compiled kernel follow these steps:
+  - Open terminal
+   - mkdir ~/android/kernel
+   - git clone https://github.com/androthan/android_kernel_samsung_aalto_legacy ~/android/kernel
+   - cd android/kernel/<kernel-source>
+   - export CROSS_COMPILE=<source-path-to-arm-eabi-toolchain-4.4.3>
+   - make aalto_defconfig
+   - make
+  - Replace <android-source>/device/samsung/aalto/kernel with <kernel-source>/arch/arm/boot/zImage)
+
+4. Build
+  - source build/envsetup.sh
+  - ./vendor/cm/get-prebuilts
+  - breakfast aalto
+  - brunch aalto          ### This will start your build
+
+Install an opensource build
+
+1. Open terminal
+  - cd <android-source>
+  - ./out/host/linux-x86/bin/mkbootimg --kernel out/target/product/aalto/kernel --ramdisk out/target/product/aalto/bootstrap.cpio.gz --base 0x81800000 --pagesize 4096 --ramdisk_offset 0x82800000 --output boot.img
+  - mv boot.img normalboot.img
+  - tar cvf cm11boot.tar normalboot.img
+
+2. Flash cm11boot.tar vie ODIN3 v1.85 to your device
+3. Boot to recovery (CWM) mode 
+4. Do a factory reset
+5. Select 'install zip from sdcard' > 'install zip from sideload'
+6. Open terminal > 'adb sideload <path-to-cm11-zip>'
+7. After install reboot!
+
+//GS1
