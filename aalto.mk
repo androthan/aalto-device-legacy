@@ -236,10 +236,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # PRODUCT_LOCALES expansion must not be a density.
 PRODUCT_AAPT_CONFIG := normal mdpi
 
-# copy wifi modules
+# Kernel modules (*.ko)
 PRODUCT_COPY_FILES += \
-	device/samsung/aalto/modules/tiwlan_drv.ko:system/lib/modules/tiwlan_drv.ko \
-	device/samsung/aalto/modules/tiap_drv.ko:system/lib/modules/tiap_drv.ko
+	$(call find-copy-subdir-files,*,device/samsung/aalto/modules,system/lib/modules)
 
 # Prebuilt kernel
 PRODUCT_COPY_FILES += \
