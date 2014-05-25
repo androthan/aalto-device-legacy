@@ -1,19 +1,20 @@
 /*
- * Copyright (C) 2008 The Android Open Source Project
- * Copyright (C) 2011 codeworkx - daniel.hillenbrand@codeworkx.de
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+* Copyright (C) 2008 The Android Open Source Project
+* Jonathan Grundmann, androthan<at>gmail, 2014
+* Copyright (C) 2011 codeworkx - daniel.hillenbrand@codeworkx.de
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 
 
 #define LOG_TAG "lights"
@@ -34,9 +35,6 @@
 #include <hardware/lights.h>
 
 /******************************************************************************/
-
-#define LEDS_LIGHT_ON		100
-#define LEDS_LIGHT_OFF		0
 
 static pthread_once_t g_init = PTHREAD_ONCE_INIT;
 static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
@@ -104,36 +102,69 @@ set_light_backlight(struct light_device_t* dev,
 }
 
 static int
-set_light_leds(struct light_state_t const *state)
+set_light_keyboard(struct light_device_t* dev,
+        struct light_state_t const* state)
+{
+    return 0;
+}
+
+static int
+set_light_buttons(struct light_device_t* dev,
+        struct light_state_t const* state)
 {
     int err = 0;
+    int on = is_lit(state);
 
+    ALOGD("set_light_button on=%d\n", on ? 255 : 0);
     pthread_mutex_lock(&g_lock);
-
-    switch (state->flashMode) {
-    case LIGHT_FLASH_NONE:
-        err = write_int(BUTTON_FILE, LEDS_LIGHT_OFF);
-        break;
-    case LIGHT_FLASH_TIMED:
-    case LIGHT_FLASH_HARDWARE:
-        err = write_int(BUTTON_FILE, LEDS_LIGHT_ON);
-        break;
-    default:
-        err = -EINVAL;
-    }
-
+    err = write_int(BUTTON_FILE, on ? 255:0);
     pthread_mutex_unlock(&g_lock);
 
     return err;
 }
 
 static int
+set_light_battery(struct light_device_t* dev,
+        struct light_state_t const* state)
+{
+    return 0;
+}
+
+static int
 set_light_notification(struct light_device_t* dev,
         struct light_state_t const* state)
 {
-    ALOGI("%s: color %u fm %u is lit %u", __func__,
-        state->color, state->flashMode, (state->color & 0x00ffffff));
-    return set_light_leds(state);
+    int err = 0;
+int brightness = rgb_to_brightness(state);
+    int v = 0;
+
+    // use the button backlight as notification led
+    pthread_mutex_lock(&g_lock);
+
+    if (brightness+state->color == 0 || brightness > 100)
+    {
+        if (state->color & 0x00ffffff)
+        {
+            v = 100;
+        }
+    }
+    else
+    {
+            v = 0;
+    }
+
+    LOGD("set_light_notification on=%d\n", v);
+    err = write_int(BUTTON_FILE, v);
+    pthread_mutex_unlock(&g_lock);
+
+    return err;
+}
+
+static int
+set_light_attention(struct light_device_t* dev,
+        struct light_state_t const* state)
+{
+    return 0;
 }
 
 static int
@@ -153,12 +184,27 @@ static int open_lights(const struct hw_module_t* module, char const* name,
     int (*set_light)(struct light_device_t* dev,
             struct light_state_t const* state);
 
-    if (0 == strcmp(LIGHT_ID_BACKLIGHT, name))
+    if (0 == strcmp(LIGHT_ID_BACKLIGHT, name)) {
         set_light = set_light_backlight;
-    else if (0 == strcmp(LIGHT_ID_NOTIFICATIONS, name))
+    }
+    else if (0 == strcmp(LIGHT_ID_KEYBOARD, name)) {
+        set_light = set_light_keyboard;
+    }
+    else if (0 == strcmp(LIGHT_ID_BUTTONS, name)) {
+        set_light = set_light_buttons;
+    }
+    else if (0 == strcmp(LIGHT_ID_BATTERY, name)) {
+        set_light = set_light_battery;
+    }
+    else if (0 == strcmp(LIGHT_ID_NOTIFICATIONS, name)) {
         set_light = set_light_notification;
-    else
+    }
+    else if (0 == strcmp(LIGHT_ID_ATTENTION, name)) {
+        set_light = set_light_attention;
+    }
+    else {
         return -EINVAL;
+    }
 
     pthread_once(&g_init, init_globals);
 
@@ -177,7 +223,7 @@ static int open_lights(const struct hw_module_t* module, char const* name,
 
 
 static struct hw_module_methods_t lights_module_methods = {
-    .open =  open_lights,
+    .open = open_lights,
 };
 
 struct hw_module_t HAL_MODULE_INFO_SYM = {
@@ -185,8 +231,7 @@ struct hw_module_t HAL_MODULE_INFO_SYM = {
     .version_major = 1,
     .version_minor = 0,
     .id = LIGHTS_HARDWARE_MODULE_ID,
-    .name = "TI OMAP lights Module",
-    .author = "Google, Inc.",
+    .name = "TI OMAP3 LED Controller",
+    .author = "codeworkx/TI/Androthan",
     .methods = &lights_module_methods,
 };
-
