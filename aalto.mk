@@ -222,7 +222,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Vold
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.vold.additionalmounts=/storage/sdcard0,/storage/sdcard1
+	ro.additionalmounts=/storage/sdcard0,/storage/sdcard1
 
 #include frameworks/native/build/phone-mdpi-512-dalvik-heap.mk
 
