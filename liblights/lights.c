@@ -34,6 +34,9 @@
 
 #include <hardware/lights.h>
 
+#define LEDS_LIGHT_ON 100
+#define LEDS_LIGHT_OFF 0
+
 /******************************************************************************/
 
 static pthread_once_t g_init = PTHREAD_ONCE_INIT;
@@ -129,21 +132,6 @@ set_light_battery(struct light_device_t* dev,
 {
     return 0;
 }
-set_light_buttons(struct light_device_t* dev,
-        struct light_state_t const* state)
-{
-    int brightness = rgb_to_brightness(state);
-    int err;
-
-
-   pthread_mutex_lock(&g_lock);
-    ALOGD("set_light_buttons: %d\n", brightness > 0 ? LEDS_LIGHT_ON : LEDS_LIGHT_OFF);
-    err = write_int(BUTTON_FILE, brightness > 0 ? LEDS_LIGHT_ON : LEDS_LIGHT_OFF);
-    pthread_mutex_unlock(&g_lock);
-
-    return err;
-}
-
 
 static int
 set_light_notification(struct light_device_t* dev,
@@ -168,7 +156,7 @@ int brightness = rgb_to_brightness(state);
             v = 0;
     }
 
-    LOGD("set_light_notification on=%d\n", v);
+    ALOGD("set_light_notification on=%d\n", v);
     err = write_int(BUTTON_FILE, v);
     pthread_mutex_unlock(&g_lock);
 
