@@ -15,6 +15,7 @@ Build CM11 for the Samsung GP 3.6
 1. Add the following lines to <source_path>/.repo/manifest.xml
   <project name="androthan/android_device_samsung_aalto" path="device/samsung/aalto" remote="github" revision="cm-11.0" />
   <project name="androthan/android_vendor_samsung_aalto" path="vendor/samsung/aalto" remote="github" revision="cm-11.0" />
+  <project name="androthan/android_external_wpa_supplicant_6" path="external/wpa_supplicant_6" remote="github" revision="cm-11.0" />
 
 2. Open terminal
   - cd <source_path>
