@@ -16,8 +16,7 @@
 PRODUCT_COPY_FILES := \
 	device/samsung/aalto/etc/asound.conf:system/etc/asound.conf \
 	device/samsung/aalto/etc/gps.conf:system/etc/gps.conf \
-	device/samsung/aalto/etc/gps.xml:system/vendor/etc/gps.xml \
-	device/samsung/aalto/etc/vold.fstab:system/etc/vold.fstab
+	device/samsung/aalto/etc/gps.xml:system/vendor/etc/gps.xml
 
 # CM init files
 PRODUCT_COPY_FILES += \
