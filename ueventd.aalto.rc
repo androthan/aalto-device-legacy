@@ -7,6 +7,7 @@
 /dev/yas529		0640	compass		system
 /dev/ttyS0		0660	system		system
 /dev/ttyS1		0660	bluetooth	bluetooth
+/dev/hci_tty	        0600	bluetooth	bluetooth
 /dev/DspBridge		0666	system		system
 /dev/video0		0660	system		camera
 /dev/video1		0660	system		system
