@@ -136,8 +136,6 @@ PRODUCT_PACKAGES := \
     playlpm \
     lpmkey \
     charging_mode \
-    uim-sysfs \
-    libbt-vendor \
 
 #Filesystem binaries
 PRODUCT_PACKAGES += \

@@ -345,11 +345,12 @@ service bdaddr /system/bin/bdaddr_read
 on property:init.svc.bootanim=running
     start bdaddr
 
-service uim /system/bin/uim-sysfs
-    class core
-    user root
-    group media bluetooth
-     oneshot
+service hciattach /system/bin/logwrapper /system/bin/hciattach -n /dev/ttyS1 texas 3000000
+    class main
+    # let hciattach drop uid to bluetooth with the right linux capabilities
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
 
 service wpa_supplicant /system/bin/wpa_supplicant -Dtiwlan0 -itiwlan0 -c/data/misc/wifi/wpa_supplicant.conf
     class main
