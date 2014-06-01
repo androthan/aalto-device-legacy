@@ -55,15 +55,15 @@ static const struct sensor_t sSensorList[] = {
         { "BMA22 Acceleration Sensor",
           "Bosch",
           1, SENSORS_ACCELERATION_HANDLE,
-          SENSOR_TYPE_ACCELEROMETER, RANGE_A, RESOLUTION_A, 0.2f, 10000, { } },
+          SENSOR_TYPE_ACCELEROMETER, RANGE_A, RESOLUTION_A, 0.2f, 10000, 0, 0, { } },
         { "MS-3C Magnetic Sensor",
           "Yamaha",
           1, SENSORS_MAGNETIC_FIELD_HANDLE,
-          SENSOR_TYPE_MAGNETIC_FIELD, RANGE_M, RESOLUTION_M, 4.0f, 10000, { } },
+          SENSOR_TYPE_MAGNETIC_FIELD, RANGE_M, RESOLUTION_M, 4.0f, 10000, 0, 0, { } },
         { "MS-3C Orientation Sensor",
           "Yamaha",
           1, SENSORS_ORIENTATION_HANDLE,
-          SENSOR_TYPE_ORIENTATION, RANGE_O, RESOLUTION_O, 4.2f, 10000, { } },
+          SENSOR_TYPE_ORIENTATION, RANGE_O, RESOLUTION_O, 4.2f, 10000, 0, 0, { } },
 };
 
 
