@@ -68,9 +68,35 @@ on post-fs-data
 # permission for battery
     chown radio system /sys/class/power_supply/battery/batt_fuelgauge_reset
     chmod 0664 /sys/class/power_supply/battery/batt_fuelgauge_reset
+    chown root system /sys/class/power_supply/battery/mp3
+    chown root system /sys/class/power_supply/battery/video
+    chown root system /sys/class/power_supply/battery/camera_preview
+    chown root system /sys/class/power_supply/battery/camera_recording
+    chown root system /sys/class/power_supply/battery/browser
+    chown root system /sys/class/power_supply/battery/wifi_browsing
+
+# permission for CABC
+    chown root system /sys/devices/platform/omapfb/graphics/fb0/samsung_aalto_cabc
 
 # ISP Resizer DSSCOMP
     chmod 0777 /sys/devices/platform/dsscomp/isprsz/enable
+
+# change permissions for alsa nodes
+    symlink /dev/snd/pcmC0D0c /dev/pcmC0D0c
+    symlink /dev/snd/pcmC0D0p /dev/pcmC0D0p
+    symlink /dev/snd/controlC0 /dev/controlC0
+    symlink /dev/snd/timer /dev/time
+
+# change ecompass device permission
+    chmod 0664 /dev/mmc328x
+    chmod 0664 /dev/ecompass_ctrl
+    chown system system /dev/mmc328x
+    chown system system /dev/ecompass_ctrl
+
+# audio tune files
+    chmod 0666 /system/etc/audio/aeqcoe.txt
+    chmod 0666 /system/etc/audio/soundbooster.txt
+    chmod 0666 /system/etc/audio/srstunning.txt
 
 # change permission of ftm_sleep
     chown system system /sys/power/ftm_sleep
@@ -111,6 +137,10 @@ on post-fs-data
 
     chown system system /sys/class/backlight/omap_bl/brightness
 
+#change accelerometer permission
+    chmod 0664 /dev/accelerometer
+    chown system system /dev/accelerometer
+
 #Permission for Vibration Intensity Setting
     chown system system /sys/vibetonz/pwmvalue_intensity
 
@@ -143,6 +173,9 @@ on post-fs-data
     mkdir /data/misc/softap 0770 system wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
 
+# Added for g-sensors
+    mkdir /data/misc/sensors 0775 system system
+
 # ril-logging
     mkdir /data/log 0775 root root
     chmod 0775 /data/log
@@ -152,6 +185,12 @@ on post-fs-data
     chown gps system /data/gps
     chown gps root /sys/class/sec/GPS_PWR_EN/value
     chmod 660 /sys/class/sec/GPS_PWR_EN/value
+    chown system system /sys/class/sec/GPS_PWR_EN/value
+    chown system system /sys/class/sec/GPS_NRST/value
+    chown system system /sys/class/sec/GPS_CNTL/value
+    chmod 660 /sys/class/sec/GPS_PWR_EN/value
+    chmod 660 /sys/class/sec/GPS_NRST/value
+    chmod 660 /sys/class/sec/GPS_CNTL/value
 
 # change permissions for overlay managers and display devices
     chown system system /sys/devices/platform/omapdss/manager0/name
@@ -201,9 +240,19 @@ on post-fs-data
     # change permissions for lcd_power
     chown radio system /sys/class/backlight/omap_bl/device/lcd_power
 
-# geomagnetic
+# geomagnetic for rev 0.1
+    chown system input /sys/class/input/input3/enable
+    chown system input /sys/class/input/input3/delay
+    chown system input /sys/class/input/input3/filter_enable
+    chown system input /sys/class/input/input3/filter_len
+    chown system input /sys/class/input/input3/data
+    chown system input /sys/class/input/input3/status
+    chown system input /sys/class/input/input3/wake
+    chown system input /sys/class/input/input3/position
+
+# geomagnetic for rev 0.8
     chown system input /sys/class/input/input4/enable
-    chown system input /sys/class/input/input4/poll_delay
+    chown system input /sys/class/input/input4/delay
     chown system input /sys/class/input/input4/filter_enable
     chown system input /sys/class/input/input4/filter_len
     chown system input /sys/class/input/input4/data
@@ -211,41 +260,69 @@ on post-fs-data
     chown system input /sys/class/input/input4/wake
     chown system input /sys/class/input/input4/position
 
-# geomagnetic raw
+# geomagnetic raw for rev 0.1
+    chown system input /sys/class/input/input4/threshold
+    chown system input /sys/class/input/input4/distortion
+    chown system input /sys/class/input/input4/shape
+    chown system input /sys/class/input/input4/offsets
+    write /sys/class/input/input4/threshold 1
+    write /sys/class/input/input4/distortion "20 20 15"
+
+# geomagnetic raw for rev 0.8
     chown system input /sys/class/input/input5/threshold
     chown system input /sys/class/input/input5/distortion
     chown system input /sys/class/input/input5/shape
     chown system input /sys/class/input/input5/offsets
     write /sys/class/input/input5/threshold 1
     write /sys/class/input/input5/distortion "20 20 15"
+    write /sys/class/input/input5/filter_enable 1
 
-# accelerometer
+# accelerometer for rev 0.1
+    chown system input /sys/class/input/input5/enable
+    chown system input /sys/class/input/input5/delay
+    chown system input /sys/class/input/input5/position
+    chown system input /sys/class/input/input5/threshold
+    chown system input /sys/class/input/input5/wake
+    chown system input /sys/class/input/input5/data
+    chown system input /sys/class/input/input5/calibration
+
+# accelerometer for rev 0.8
     chown system input /sys/class/input/input6/enable
-    chown system input /sys/class/input/input6/poll_delay
+    chown system input /sys/class/input/input6/delay
     chown system input /sys/class/input/input6/position
     chown system input /sys/class/input/input6/threshold
     chown system input /sys/class/input/input6/wake
     chown system input /sys/class/input/input6/data
-    chown system input /sys/class/sensors/accelerometer_sensor/raw_data
-    chown system input /sys/class/sensors/accelerometer_sensor/calibration
+    chown system input /sys/class/input/input6/calibration
 
 # orientation
-    chown system input /sys/class/input/input9/enable
-    chown system input /sys/class/input/input9/poll_delay
-    chown system input /sys/class/input/input9/wake
-    chown system input /sys/class/input/input9/data
-    chown system input /sys/class/input/input9/status
+    chown system input /sys/class/input/input6/enable
+    chown system input /sys/class/input/input6/delay
+    chown system input /sys/class/input/input6/wake
+    chown system input /sys/class/input/input6/data
+    chown system input /sys/class/input/input6/status
 
 # proximity
     chown system input /sys/class/input/input7/enable
-    chown system input /sys/class/input/input7/poll_delay
-    chown system input /sys/class/sensors/proximity_sensor/adc
+    chown system input /sys/class/input/input7/delay
+    chown system input /sys/class/input/input7/wake
+    chown system input /sys/class/input/input7/data
+    chown system input /sys/class/input/input7/status
 
 # light sensor
     chown system input /sys/class/input/input8/enable
-    chown system input /sys/class/input/input8/poll_delay
-    chown system input /sys/class/sensors/light_sensor/lux
-    chown system input /sys/class/sensors/light_sensor/adc
+    chown system input /sys/class/input/input8/delay
+    chown system input /sys/class/input/input8/wake
+    chown system input /sys/class/input/input8/data
+    chown system input /sys/class/input/input8/status
+
+# for rev 0.8
+    chown system input /sys/class/input/input9/enable
+    chown system input /sys/class/input/input9/delay
+    chown system input /sys/class/input/input9/wake
+    chown system input /sys/class/input/input9/data
+    chown system input /sys/class/input/input9/status
+    chown system input /sys/class/input/input9/testmode
 
 # Permissions for bluetooth.
     chmod 0660 /dev/ttyS1
@@ -311,6 +388,8 @@ on boot
 # Increase readahead buffers on MMC devices
     write /sys/block/mmcblk0/bdi/read_ahead_kb 1024
 
+    setprop ro.bt.bdaddr_path "efs/bluetooth/bt_addr"
+
 # Touchscreen: bootcomplete
     write /sys/touchscreen/bootcomplete 1
 
@@ -352,7 +431,7 @@ service hciattach /system/bin/logwrapper /system/bin/hciattach -n /dev/ttyS1 tex
     disabled
     oneshot
 
-service wpa_supplicant /system/bin/wpa_supplicant -Dtiwlan0 -itiwlan0 -c/data/misc/wifi/wpa_supplicant.conf
+service wpa_supplicant /system/bin/wpa_supplicant -Dtiwlan0 -itiwlan0 -c/system/etc/wifi/wpa_supplicant.conf
     class main
     socket wpa_tiwlan0 dgram 0660 wifi wifi
     disabled
@@ -425,6 +504,12 @@ service geomagneticd /system/bin/geomagneticd
     class main
     user compass
     group system input
+
+# Compass daemon
+service memsicd /system/bin/memsicd
+    user system
+    group system
+    oneshot
 
 service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0 /storage/sdcard0
     class late_start
