@@ -12,6 +12,7 @@ on init
 
     mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
     mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+    mkdir /storage/sdcard 0700 system system
     mkdir /storage/sdcard0 0700 system system
     mkdir /storage/sdcard1 0700 system system
     symlink /storage/sdcard0 /sdcard
@@ -399,6 +400,12 @@ service fix_mac /system/bin/sh /system/bin/fix_mac.sh
     user root
     oneshot
 
+# Fix SD card
+service fixsd /system/bin/sh /system/bin/fixsd.sh
+    class main
+    user root
+    oneshot
+
 # 3D init
 service pvrsrvinit /system/bin/pvrsrvinit
     class core
@@ -424,7 +431,7 @@ service bdaddr /system/bin/bdaddr_read
 on property:init.svc.bootanim=running
     start bdaddr
 
-service hciattach /system/bin/logwrapper /system/bin/hciattach -n /dev/ttyS1 texas 3000000
+service hciattach /system/bin/hciattach -n /dev/ttyS1 texas 3000000
     class main
     # let hciattach drop uid to bluetooth with the right linux capabilities
     group bluetooth net_bt_admin

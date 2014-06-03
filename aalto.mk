@@ -136,6 +136,7 @@ PRODUCT_PACKAGES := \
     playlpm \
     lpmkey \
     charging_mode \
+    wlan_loader
 
 #Filesystem binaries
 PRODUCT_PACKAGES += \
@@ -224,10 +225,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vold.umsdirtyratio=20
 
 # Vold
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.additionalmounts=/storage/sdcard0,/storage/sdcard1
 
-#include frameworks/native/build/phone-mdpi-512-dalvik-heap.mk
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vold.switchablepair=/storage/sdcard0,/storage/sdcard1 \
+    ro.additionalmounts=/storage/sdcard1
+
+include frameworks/native/build/phone-hdpi-512-dalvik-heap.mk
 
 # Screen density is actually considered a locale (since it is taken into account
 # the the build-time selection of resources). The product definitions including
@@ -250,6 +253,10 @@ PRODUCT_COPY_FILES += \
 # hostap wrapper
 PRODUCT_COPY_FILES += \
 	device/samsung/aalto/hostap_wrapper.sh:system/bin/hostap_wrapper.sh 
+
+# fix sd script
+PRODUCT_COPY_FILES += \
+	device/samsung/aalto/fixsd.sh:system/bin/fixsd.sh
 
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care

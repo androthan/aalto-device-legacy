@@ -5,7 +5,7 @@ $(call inherit-product, vendor/cm/config/gsm.mk)
 PRODUCT_RELEASE_NAME := GalaxyPlayer36
 
 # Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+$(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
 
 # Inherit device configuration
 $(call inherit-product, device/samsung/aalto/full_aalto.mk)
@@ -15,3 +15,7 @@ PRODUCT_DEVICE := aalto
 PRODUCT_NAME := cm_aalto
 PRODUCT_BRAND := Samsung
 PRODUCT_MODEL := YP-GS1
+
+# Prebuilt bootanimation
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/bootanimation/320.zip:system/media/bootanimation.zip
