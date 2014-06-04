@@ -440,7 +440,9 @@ service hciattach /system/bin/hciattach -n /dev/ttyS1 texas 3000000
     disabled
     oneshot
 
-service wpa_supplicant /system/bin/wpa_supplicant -Dtiwlan0 -itiwlan0 -c/data/misc/wifi/wpa_supplicant.conf -g@android:wpa_tiwlan0
+service wpa_supplicant /system/bin/wpa_supplicant \
+   -Dtiwlan0 -itiwlan0 -c/data/misc/wifi/wpa_supplicant.conf \
+   -O/data/misc/wifi/sockets  -g@android:wpa_tiwlan0
     class main
     socket wpa_tiwlan0 dgram 0660 wifi wifi
     disabled
