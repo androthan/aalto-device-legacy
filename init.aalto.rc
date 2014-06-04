@@ -170,9 +170,11 @@ on post-fs-data
     chmod 0777 /sys/devices/platform/omapdss/overlay2/enabled
 
 # wi-fi
-    mkdir /data/misc/wifi/sockets 0770 system wifi
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/softap 0770 system wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
+    chown dhcp dhcp /data/misc/dhcp
 
 # Added for g-sensors
     mkdir /data/misc/sensors 0775 system system
