@@ -15,5 +15,5 @@
 
 
 # Media
-/dev/block/mmcblk0p10 /internal_sdcard vfat  lun=/sys/devices/platform/usb_mass_storage/lun0/file
-/dev/block/mmcblk1p1 /external_sdcard vfat lun=/sys/devices/platform/usb_mass_storage/lun1/file
+/dev/block/mmcblk0p10 /internal_sdcard vfat  lun=/sys/devices/platform/usb_mass_storage/lun0/file defaults
+/dev/block/mmcblk1p1 /external_sdcard vfat lun=/sys/devices/platform/usb_mass_storage/lun1/file defaults
