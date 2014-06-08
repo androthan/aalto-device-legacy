@@ -48,8 +48,8 @@ TARGET_PREBUILT_KERNEL := device/samsung/aalto/kernel
 BOARD_HAS_NO_SELECT_BUTTON := true
 # BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/aalto/recovery/recovery_keys.c
 # BOARD_USES_BML_OVER_MTD := true
-TARGET_RECOVERY_FSTAB := device/samsung/aalto/fstab.aalto
-RECOVERY_FSTAB_VERSION := 2
+# TARGET_RECOVERY_FSTAB := device/samsung/aalto/fstab.aalto
+# RECOVERY_FSTAB_VERSION := 2
 
 # fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
