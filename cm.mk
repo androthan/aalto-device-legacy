@@ -1,6 +1,9 @@
 # Release name
 PRODUCT_RELEASE_NAME := GalaxyPlayer36
 
+# RIL stuff
+$(call inherit-product, vendor/cm/config/gsm.mk)
+
 # Inherit some common CM stuff
 $(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
 
