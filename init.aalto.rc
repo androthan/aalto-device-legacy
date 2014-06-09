@@ -1,5 +1,10 @@
 import init.aalto.usb.rc
 
+on early-init
+    # boost boot
+    write /sys/devices/system/cpu0/cpufreq/scaling_max_freq 1000000
+    write /sys/devices/system/cpu0/cpufreq/scaling_governor performance
+
 on init
     export EXTERNAL_STORAGE /storage/sdcard0
     export SECONDARY_STORAGE /storage/sdcard1
