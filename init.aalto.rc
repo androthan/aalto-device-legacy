@@ -50,10 +50,6 @@ on fs
     chmod 770 /efs/bluetooth
     chmod 770 /efs/imei
 
-    # Vibetonz
-    export TMPDIR /data/local/tmp
-    symlink /data/local/tmp /tmp
-
     mount debugfs debugfs /debug
 
     # additional kernel modules
