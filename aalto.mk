@@ -160,7 +160,7 @@ PRODUCT_COPY_FILES += \
 	device/samsung/aalto/etc/powervr.ini:system/etc/powervr.ini
 
 #Camera
-PRODUCT_PACKAGES += camera.omap3
+PRODUCT_PACKAGES += camera.aalto
 
 # OMX stuff
 PRODUCT_PACKAGES += \

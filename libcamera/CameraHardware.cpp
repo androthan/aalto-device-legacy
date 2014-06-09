@@ -1439,7 +1439,7 @@ void CameraHardware::CreateExif(unsigned char* pInThumbnailData,int Inthumbsize,
 		memset(&ExifInfo, NULL, sizeof(ExifInfoStructure));
 
 		strcpy( (char *)&ExifInfo.maker, "SAMSUNG");
-		strcpy( (char *)&ExifInfo.model, "GT-I9003");
+		strcpy( (char *)&ExifInfo.model, "YP-GS1");
 
 		mParameters.getPreviewSize(&w, &h);
 
