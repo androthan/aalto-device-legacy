@@ -18,6 +18,10 @@ PRODUCT_COPY_FILES := \
 	device/samsung/aalto/etc/gps.conf:system/etc/gps.conf \
 	device/samsung/aalto/etc/gps.xml:system/vendor/etc/gps.xml
 
+
+# device specific overlays
+DEVICE_PACKAGE_OVERLAYS += device/samsung/aalto/overlay
+
 # CM init files
 PRODUCT_COPY_FILES += \
 	device/samsung/aalto/init.aalto.rc:root/init.aalto.rc \
@@ -137,7 +141,8 @@ PRODUCT_PACKAGES := \
     playlpm \
     lpmkey \
     charging_mode \
-    wlan_loader
+    wlan_loader \
+    Droidwall
 
 #Filesystem binaries
 PRODUCT_PACKAGES += \
