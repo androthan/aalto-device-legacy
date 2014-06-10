@@ -112,9 +112,6 @@
     <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">false</bool>
 
-    <!-- Disable the home key unlock setting -->
-    <bool name="config_disableHomeUnlockSetting">false</bool>
-
     <!-- Dont reload the firmware via the framework, let wifi legacy and tiap_loader do that -->
     <bool name="config_wifiApFirmwareReload">false</bool>
 
