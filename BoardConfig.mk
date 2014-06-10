@@ -11,6 +11,8 @@ TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := cortex-a8
 TARGET_ARCH_VARIANT_FPU := neon
 TARGET_CPU_VARIANT := cortex-a8
+TARGET_ARCH_LOWMEM := true
+TARGET_ARCH_VARIANT_FPU := neon
 
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
@@ -70,6 +72,8 @@ COMMON_GLOBAL_CFLAGS += -DHAS_CONTEXT_PRIORITY
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
 
+# Enable WEBGL in WebKit
+ENABLE_WEBGL := true
 
 # OMX Stuff
 HARDWARE_OMX := true
