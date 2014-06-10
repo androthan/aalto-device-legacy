@@ -403,12 +403,6 @@ service fix_mac /system/bin/sh /system/bin/fix_mac.sh
     user root
     oneshot
 
-# Fix SD card
-service fixsd /system/bin/sh /system/bin/fixsd.sh
-    class main
-    user root
-    oneshot
-
 # 3D init
 service pvrsrvinit /system/bin/pvrsrvinit
     class core
