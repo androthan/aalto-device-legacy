@@ -23,12 +23,14 @@
     <!-- There is no charging LED -->
     <bool name="config_unplugTurnsOnScreen">true</bool>
 
+    <bool name="config_animateScreenLights">false</bool>
+
     <!-- Disable menu hard button -->
     <bool name="config_disableMenuKeyInLockScreen">true</bool>
 
 	<!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
          autodetected from the Configuration. -->
-    <bool name="config_showNavigationBar">true</bool>
+    <bool name="config_showNavigationBar">false</bool>
 
     <integer name="config_deskDockKeepsScreenOn">0</integer>
     <integer name="config_carDockKeepsScreenOn">1</integer>
@@ -65,9 +67,6 @@
     <integer-array name="config_keyboardTapVibePattern">
         <item>10</item>
     </integer-array>
-
-    <!-- Disable some slowing-down effects -->
-    <bool name="config_sf_slowBlur">true</bool>
 
     <!-- The default iface on which to monitor data use -->
     <string name="config_datause_iface">tiwlan0</string>
@@ -110,6 +109,9 @@
     
     <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">false</bool>
+
+    <!-- Disable lockscreen translucent decor by default -->
+    <bool name="config_enableLockScreenTranslucentDecor">true</bool>
 
     <!-- Dont reload the firmware via the framework, let wifi legacy and tiap_loader do that -->
     <bool name="config_wifiApFirmwareReload">false</bool>
