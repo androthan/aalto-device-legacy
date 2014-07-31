@@ -28,10 +28,6 @@
     <!-- Disable menu hard button -->
     <bool name="config_disableMenuKeyInLockScreen">true</bool>
 
-	<!-- Whether a software navigation bar should be shown. NOTE: in the future this may be
-         autodetected from the Configuration. -->
-    <bool name="config_showNavigationBar">false</bool>
-
     <integer name="config_deskDockKeepsScreenOn">0</integer>
     <integer name="config_carDockKeepsScreenOn">1</integer>
 
