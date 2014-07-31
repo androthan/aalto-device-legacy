@@ -14,10 +14,6 @@
 /dev/block/mmcblk0p9    /data       ext4       defaults recoveryonly
 
 # Media
-<<<<<<< HEAD
-/devices/platform/mmci-omap-hs.1/mmc_host/mmc0 /storage/sdcard0 vfat defaults voldmanaged=sdcard0:1,nonremovable
-/devices/platform/mmci-omap-hs.0/mmc_host/mmc1 /storage/sdcard1 vfat defaults voldmanaged=sdcard1:auto
-=======
-/devices/platform/mmci-omap-hs.1/mmc_host/mmc0   /storage/sdcard0    vfat		defaults		voldmanaged=sdcard0:1,nonremovable,noemulatedsd
-/devices/platform/mmci-omap-hs.0/mmc_host/mmc1   /storage/sdcard1    vfat		defaults		voldmanaged=sdcard1:auto
->>>>>>> parent of c36e53d... Permissions cleanup
+/devices/platform/mmci-omap-hs.1/mmc_host/mmc0 auto auto defaults voldmanaged=sdcard0:1,nonremovable,noemulatedsd
+/devices/platform/mmci-omap-hs.0/mmc_host/mmc1 auto auto defaults voldmanaged=sdcard1:auto
+
