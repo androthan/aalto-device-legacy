@@ -36,7 +36,7 @@ PRODUCT_COPY_FILES += \
 	device/samsung/aalto/recovery.rc:recovery/root/init.rc \
 	device/samsung/aalto/lpm.rc:recovery/root/lpm.rc \
 	device/samsung/aalto/ueventd.aalto.rc:recovery/root/ueventd.aalto.rc \
-        device/samsung/aalto/recovery.fstab:recovery/root/recovery.fstab
+        device/samsung/aalto/aalto.fstab:recovery/root/aalto.fstab
 
 # Configuration files for audio
 PRODUCT_COPY_FILES += \
