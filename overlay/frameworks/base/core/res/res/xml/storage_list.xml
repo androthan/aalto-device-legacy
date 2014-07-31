@@ -35,23 +35,13 @@
 <StorageList xmlns:android="http://schemas.android.com/apk/res/android">
     <storage android:mountPoint="/storage/sdcard0"
              android:storageDescription="@string/storage_usb"
-<<<<<<< HEAD
-             android:primary="true"
-             android:emulated="true"
-=======
              android:primary="false"
->>>>>>> parent of c36e53d... Permissions cleanup
              android:removable="false"
              android:allowMassStorage="true" />
 
     <storage android:mountPoint="/storage/sdcard1"
              android:storageDescription="@string/storage_sd_card"
-<<<<<<< HEAD
-             android:primary="false"
-             android:emulated="false"
-=======
              android:primary="true"
->>>>>>> parent of c36e53d... Permissions cleanup
              android:removable="true"
              android:allowMassStorage="true" />
 </StorageList>

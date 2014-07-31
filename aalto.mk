@@ -20,7 +20,7 @@ PRODUCT_COPY_FILES := \
 
 
 # device specific overlays
-#DEVICE_PACKAGE_OVERLAYS += device/samsung/aalto/overlay
+DEVICE_PACKAGE_OVERLAYS += device/samsung/aalto/overlay
 
 # CM init files
 PRODUCT_COPY_FILES += \
@@ -189,9 +189,6 @@ PRODUCT_PACKAGES += \
     libOMX_Core
 
 PRODUCT_PACKAGES += hostap
-
-# device specific overlays
-#DEVICE_PACKAGE_OVERLAYS += device/samsung/aalto/overlay
 
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number
