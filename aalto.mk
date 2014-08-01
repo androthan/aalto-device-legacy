@@ -86,12 +86,7 @@ PRODUCT_COPY_FILES += \
 
 # wifi configuration files
 PRODUCT_COPY_FILES += \
-    device/samsung/aalto/etc/wifi/firmware.bin:system/etc/wifi/firmware.bin \
-    device/samsung/aalto/etc/wifi/tiwlan_plt.ini:system/etc/wifi/tiwlan_plt.ini \
-    device/samsung/aalto/etc/wifi/softap/ap_firmware.bin:system/etc/wifi/softap/ap_firmware.bin \
-    device/samsung/aalto/etc/wifi/softap/hostapd.conf:system/etc/wifi/softap/hostapd.conf \
-    device/samsung/aalto/etc/wifi/softap/tiwlan_ap.ini:system/etc/wifi/softap/tiwlan_ap.ini \
-    device/samsung/aalto/etc/wifi/tiwlan.ini:system/etc/wifi/tiwlan.ini
+	$(call find-copy-subdir-files,*,device/samsung/aalto/etc/wifi,system/etc/wifi)
  
 # configuration files
 PRODUCT_COPY_FILES += \
